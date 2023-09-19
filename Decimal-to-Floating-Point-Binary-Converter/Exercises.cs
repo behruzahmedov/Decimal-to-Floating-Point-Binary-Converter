@@ -24,32 +24,18 @@ namespace Decimal_to_Floating_Point_Binary_Converter
                 num /= 2;
                 num = Math.Floor(num);
             }
-            //Make sure the string has length 4 so that last 4 bits can be taken
-            while (str.Length < 4)
-            {
-                str = str.Insert(0, "0");
-            }
-            str = str.Substring(str.Length - 4);
             return Convert.ToDouble(str);
         }
 
         public static double DecToBinFractional(double num)
         {
             string str = string.Empty;
-            num = num - Math.Floor(num);
+            num -= Math.Floor(num);
             for (int i = 0; i < 5; i++)
             {
                 num *= 2;
                 str += Convert.ToString(num)[0];
-                num = num - Math.Floor(num);
-            }
-            if (str[-1] == '0')
-            {
-                str = str.Substring(0, str.Length - 1);
-            }
-            else
-            {
-
+                num -= Math.Floor(num);
             }
             return Convert.ToDouble(str);
         }
