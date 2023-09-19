@@ -5,6 +5,7 @@
         static void Main()
         {
             //Will call the function here
+            Console.WriteLine(Exercises.DecToBinWholeNumber(36d));
         }
     }
 }
