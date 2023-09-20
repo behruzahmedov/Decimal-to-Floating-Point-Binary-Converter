@@ -14,34 +14,58 @@ namespace Decimal_to_Floating_Point_Binary_Converter
 {
     public static class Exercises
     {
-        public static double DecToBinWholeNumber(double num)
+        public static string DecToBinWholeNumber(double num)
         {
             string str = string.Empty;
-            num = Math.Floor(num);
-            while (num > 0)
+            bool negative = false;
+            if (num < 0)
             {
-                str = str.Insert(0, Convert.ToString(num % 2));
-                num /= 2;
-                num = Math.Floor(num);
+                negative = true;
             }
-            return Convert.ToDouble(str);
+            num = Math.Floor(num);
+            while (Math.Abs(num) > 0) { 
+                str = str.Insert(0, Convert.ToString(Math.Abs(num) % 2));
+                if (negative == true && Math.Abs(num) % 2 == 1 && num != -1)
+                {
+                    num = num/2 - 0.5;
+                }
+                else
+                {
+                    num = (double)((int)num / 2);
+                }
+            }
+            if (negative == false)
+            {
+                str = str.Insert(0, "0");
+            }
+            return str;
         }
 
-        public static double DecToBinFractional(double num)
+        public static string DecToBinFractional(double num)
         {
             string str = string.Empty;
-            num -= Math.Floor(num);
+            bool negative = false;
+            if (num < 0)
+            {
+                negative = true;
+            }
+            num = Math.Abs(num) - Math.Floor(Math.Abs(num));
+            if (negative)
+            {
+                num = 1 - num;
+            }
             for (int i = 0; i < 5; i++)
             {
                 num *= 2;
                 str += Convert.ToString(num)[0];
                 num -= Math.Floor(num);
             }
-            return Convert.ToDouble(str);
+            return str;
         }
         public static string DecToBinFixed(double num)
         {
-            return "code";
+            string bin = DecToBinWholeNumber(num) + '·' + DecToBinFractional(num);
+            return bin;
         }
     }
 }

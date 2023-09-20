@@ -5,7 +5,7 @@
         static void Main()
         {
             //Will call the function here
-            Console.WriteLine(Exercises.DecToBinWholeNumber(36d));
+            Console.WriteLine(Exercises.DecToBinFixed(-36.875));
         }
     }
 }
