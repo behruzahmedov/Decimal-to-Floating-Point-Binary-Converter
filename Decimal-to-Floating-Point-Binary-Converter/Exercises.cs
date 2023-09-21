@@ -38,6 +38,10 @@ namespace Decimal_to_Floating_Point_Binary_Converter
             {
                 str = str.Insert(0, "0");
             }
+            if (str==string.Empty)
+            {
+                str = "0";
+            }
             return str;
         }
 
@@ -72,13 +76,13 @@ namespace Decimal_to_Floating_Point_Binary_Converter
         {
             string bin = DecToBinFixed(num);
             int interpunct = bin.IndexOf('·');
+            bin = bin.Remove(interpunct, 1);
             if (bin[0] == '1')
             {
                 int index0 = bin.IndexOf('0');
                 bin = bin.Insert(index0, "·");
                 double exponent = (double)(interpunct - index0);
                 string exponentstring = DecToBinWholeNumber(exponent);
-                bin = bin.Remove(interpunct + 1, 1);
                 bin = "1" + bin.Substring(index0);
                 bin += "     " + exponentstring;
             }
@@ -88,7 +92,6 @@ namespace Decimal_to_Floating_Point_Binary_Converter
                 bin = bin.Insert(index0, "·");
                 double exponent = (double)(interpunct - index0);
                 string exponentstring = DecToBinWholeNumber(exponent);
-                bin = bin.Remove(interpunct + 1, 1);
                 bin = "0" + bin.Substring(index0);
                 bin += "     " + exponentstring;
             }

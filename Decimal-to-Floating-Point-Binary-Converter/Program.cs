@@ -5,8 +5,8 @@
         static void Main()
         {
             //Will call the function here
-            Console.WriteLine(Exercises.DecToBinFixed(5.5));
-            Console.WriteLine(Exercises.DecToBinFloating(5.5));
+            Console.WriteLine(Exercises.DecToBinFixed(0.5));
+            Console.WriteLine(Exercises.DecToBinFloating(0.5));
         }
     }
 }
