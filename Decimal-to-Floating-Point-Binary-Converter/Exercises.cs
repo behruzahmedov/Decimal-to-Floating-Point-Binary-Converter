@@ -67,5 +67,32 @@ namespace Decimal_to_Floating_Point_Binary_Converter
             string bin = DecToBinWholeNumber(num) + '·' + DecToBinFractional(num);
             return bin;
         }
+
+        public static string DecToBinFloating(double num)
+        {
+            string bin = DecToBinFixed(num);
+            int interpunct = bin.IndexOf('·');
+            if (bin[0] == '1')
+            {
+                int index0 = bin.IndexOf('0');
+                bin = bin.Insert(index0, "·");
+                double exponent = (double)(interpunct - index0);
+                string exponentstring = DecToBinWholeNumber(exponent);
+                bin = bin.Remove(interpunct + 1, 1);
+                bin = "1" + bin.Substring(index0);
+                bin += "     " + exponentstring;
+            }
+            else if (bin[0] == '0')
+            {
+                int index0 = bin.IndexOf('1');
+                bin = bin.Insert(index0, "·");
+                double exponent = (double)(interpunct - index0);
+                string exponentstring = DecToBinWholeNumber(exponent);
+                bin = bin.Remove(interpunct + 1, 1);
+                bin = "0" + bin.Substring(index0);
+                bin += "     " + exponentstring;
+            }
+            return bin;
+        }
     }
 }
